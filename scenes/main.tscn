@@ -1,0 +1,156 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6vxvwm0yr8pm"]
+
+[ext_resource type="Script" path="res://scenes/main.gd"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("res://scenes/main.gd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 10, 0)
+energy_multiplier = 2.0
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("res://scenes/player.gd")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+current = true
+fov = 75.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = CapsuleShape3D.new()
+
+[node name="Ghost" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, -15)
+script = ExtResource("res://scenes/ghost.gd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ghost"]
+mesh = BoxMesh.new()
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ghost"]
+shape = BoxShape3D.new()
+
+[node name="House" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+mesh = BoxMesh.new()
+
+[node name="FloorCollision" type="CollisionShape3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="WallFront" type="MeshInstance3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 15, 0, 0, 0, 1, 0, 7.5, -25, 0, 0, 0)
+mesh = BoxMesh.new()
+modifying = true
+
+[node name="WallFrontCollision" type="CollisionShape3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 15, 0, 0, 0, 1, 0, 7.5, -25, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="WallBack" type="MeshInstance3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 15, 0, 0, 0, 1, 0, 7.5, 25, 0, 0, 0)
+mesh = BoxMesh.new()
+modifying = true
+
+[node name="WallBackCollision" type="CollisionShape3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 15, 0, 0, 0, 1, 0, 7.5, 25, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="WallLeft" type="MeshInstance3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 15, 0, 0, 0, 50, -25, 7.5, 0, 0, 0, 0)
+mesh = BoxMesh.new()
+modifying = true
+
+[node name="WallLeftCollision" type="CollisionShape3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 15, 0, 0, 0, 50, -25, 7.5, 0, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="WallRight" type="MeshInstance3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 15, 0, 0, 0, 50, 25, 7.5, 0, 0, 0, 0)
+mesh = BoxMesh.new()
+modifying = true
+
+[node name="WallRightCollision" type="CollisionShape3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 15, 0, 0, 0, 50, 25, 7.5, 0, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="Ceiling" type="MeshInstance3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 15, 0, 0, 0, 0)
+mesh = BoxMesh.new()
+modifying = true
+
+[node name="CeilingCollision" type="CollisionShape3D" parent="House"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 15, 0, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="Door" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 0)
+script = ExtResource("res://scenes/door.gd")
+
+[node name="DoorMesh" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = BoxMesh.new()
+
+[node name="DoorCollision" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 1, 0, 2.5, 0)
+shape = BoxShape3D.new()
+
+[node name="Keys" type="Node3D" parent="."]
+
+[node name="Key1" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, -10)
+script = ExtResource("res://scenes/key.gd")
+
+[node name="KeyMesh" type="MeshInstance3D" parent="Keys/Key1"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = BoxMesh.new()
+
+[node name="KeyCollision" type="CollisionShape3D" parent="Keys/Key1"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="Key2" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, 10)
+script = ExtResource("res://scenes/key.gd")
+
+[node name="KeyMesh" type="MeshInstance3D" parent="Keys/Key2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = BoxMesh.new()
+
+[node name="KeyCollision" type="CollisionShape3D" parent="Keys/Key2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="Key3" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 15)
+script = ExtResource("res://scenes/key.gd")
+
+[node name="KeyMesh" type="MeshInstance3D" parent="Keys/Key3"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = BoxMesh.new()
+
+[node name="KeyCollision" type="CollisionShape3D" parent="Keys/Key3"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = BoxShape3D.new()
+
+[node name="UIManager" type="CanvasLayer" parent="."]
+script = ExtResource("res://scenes/ui_manager.gd")
+
+[node name="Label" type="Label" parent="UIManager"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.1
+anchor_bottom = 0.1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 100.0
+text = "Keys: 0/1
+Health: 100"
+theme_override_font_sizes/font_size = 32
