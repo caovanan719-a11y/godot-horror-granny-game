@@ -1,0 +1,16 @@
+[gd_project]
+
+config_version=5
+
+[application]
+
+config/name="House of Shadows - Horror Game"
+config/version="1.0.0"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.1")
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+environment/ambient_light/enabled=true
+environment/ambient_light/energy=0.5
